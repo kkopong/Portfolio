@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #09090b;
+  --secondary: #18181b;
+  --accent: #10b981; /* Emerald Green */
+  --accent-glow: rgba(16, 185, 129, 0.4);
+  --grid-color: rgba(39, 39, 42, 0.3);
+  --soft-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
+  border: 2px solid var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+body {
+  margin: 0;
+  background-color: var(--primary);
+  color: white;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+.cyber-grid {
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  mask-image: radial-gradient(circle at center, black, transparent 90%);
+}
+
+.glass-card {
+  background: rgba(24, 24, 27, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: var(--soft-shadow);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(24, 24, 27, 0.6);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scanline {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.02); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.typing-text {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--accent);
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent); }
+}
+
+
+/* Timeline Styles */
+.timeline-dot {
+  @apply w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_15px_rgba(34,211,238,0.5)];
+}
+
+.timeline-line {
+  @apply w-0.5 bg-gradient-to-b from-cyan-500/50 via-cyan-500/20 to-transparent;
+}
+
+/* Lab Experiment Effects */
+.experiment-card {
+  @apply relative overflow-hidden bg-slate-900/40 border border-slate-800 hover:border-cyan-500/30 transition-all duration-300;
+  background-image: 
+    radial-gradient(circle at 2px 2px, rgba(34, 211, 238, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.experiment-status {
+  @apply text-[10px] uppercase tracking-widest font-mono px-2 py-0.5 rounded-full border;
+}
+
+.status-active {
+  @apply text-emerald-400 border-emerald-400/20 bg-emerald-400/5;
+}
+
+.status-stable {
+  @apply text-cyan-400 border-cyan-400/20 bg-cyan-400/5;
+}
+
+.status-hibernation {
+  @apply text-amber-400 border-amber-400/20 bg-amber-400/5;
+}
